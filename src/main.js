@@ -1,22 +1,25 @@
 import { Telegraf } from "telegraf";
-import pkg from 'config';
-const config = pkg;
 import { chatGPT } from './chatgpt.js';
 import { create } from './notion.js';
 import { Loader } from './loader.js';
 
+// Добавьте эту строку для загрузки переменных среды из файла .env
+import 'dotenv/config';
+
 // Инициализация бота
-const bot = new Telegraf(config.get('TELEGRAM_TOKEN'));
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
+
 // Обработчик команды start
 bot.command('start', (ctx) => {
-    ctx.reply('Напишить 3 слова, про що створити казку');
-  });
-  
+    ctx.reply('Напишите 3 слова, про что создать сказку');
+});
+
 // Обработчик текстовых сообщений
 bot.on('text', proccessGPTResponse);
 
 async function proccessGPTResponse(ctx) {
   try {
+    // Остальная часть вашего кода остается без изменений...
     const text = ctx.message.text;
     if (!text.trim()) {
       ctx.reply('Текст не может быть пустым');

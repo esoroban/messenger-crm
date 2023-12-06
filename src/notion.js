@@ -1,16 +1,16 @@
 import { Client as NotionClient } from '@notionhq/client';
-import config from 'config';
+import 'dotenv/config';
 
 // Инициализация клиента Notion с использованием ключа аутентификации
 const notion = new NotionClient({
-  auth: config.get('NOTION_KEY'),
+  auth: process.env.NOTION_KEY,
 });
 
 // Асинхронная функция для создания новой страницы в базе данных Notion
 export async function create(short, text) {
   // Создание страницы в базе данных Notion
   const dbResponse = await notion.pages.create({
-    parent: { database_id: config.get('NOTION_DB_ID') },
+    parent: { database_id: process.env.NOTION_DB_ID },
     properties: {
       Name: {
         title: [
