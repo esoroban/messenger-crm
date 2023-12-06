@@ -1,6 +1,0 @@
-
-node_modules
-.vscode
-../config/default.json
-../.env
-.env
