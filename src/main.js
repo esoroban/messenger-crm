@@ -11,7 +11,7 @@ const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
 // Обработчик команды start
 bot.command('start', (ctx) => {
-    ctx.reply('Напишите 3 слова, про что создать сказку');
+    ctx.reply('Напишіть декілька слів, а я зроблю з них казку');
 });
 
 // Обработчик текстовых сообщений
