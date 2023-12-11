@@ -7,7 +7,7 @@ const notion = new NotionClient({
 });
 
 // Асинхронная функция для создания новой страницы в базе данных Notion
-export async function create(short, text) {
+export async function create(short, text, authorName) {
   // Создание страницы в базе данных Notion
   const dbResponse = await notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_ID },
@@ -29,7 +29,38 @@ export async function create(short, text) {
     },
   });
 
-  // Добавление блока текста на созданную страницу
+  // Сконструировать текст с добавлением активной ссылки
+  const fullText = [
+    {
+      type: 'text',
+      text: {
+        content: text + "\n\n",
+      },
+    },
+    {
+      type: 'text',
+      text: {
+        content: 'Зроблено за допомогою ',
+      },
+    },
+    {
+      type: 'text',
+      text: {
+        content: '@Sorobankazkabot',
+        link: {
+          url: 'https://t.me/Sorobankazkabot',
+        },
+      },
+    },
+    {
+      type: 'text',
+      text: {
+        content: '\nАвтор: ' + authorName,
+      },
+    },
+  ];
+
+  // Добавление блока текста на созданную страницу с активной ссылкой
   await notion.blocks.children.append({
     block_id: dbResponse.id,
     children: [
@@ -37,14 +68,7 @@ export async function create(short, text) {
         object: 'block',
         type: 'paragraph',
         paragraph: {
-          rich_text: [
-            {
-              type: 'text',
-              text: {
-                content: text,
-              },
-            },
-          ],
+          rich_text: fullText,
         },
       },
     ],

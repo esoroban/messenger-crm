@@ -37,7 +37,9 @@ async function proccessGPTResponse(ctx) {
     }
 
     // Сохранение текста в Notion и получение URL созданной страницы
-    const notionResp = await create(text, response.content);
+    const notionResp = await create(text, response.content, ctx.from.first_name);
+
+    
 
     // Отправка ответа от OpenAI в чат Telegram
     ctx.reply(response.content);
