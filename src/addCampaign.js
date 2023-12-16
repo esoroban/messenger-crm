@@ -38,7 +38,7 @@ const createTelegramLink = (managerID, campaignID) => {
 const main = async () => {
     // Пример использования: предположим, что ID менеджера равен 1
     const managerId = 1;
-    const campaign = await addCampaign(managerId, 'Первая рекламная компания', 'ads_1', 'Ты помощник который отвечает', 'Привет это Соробан Днепр. Чем могу быть полезен?');
+    const campaign = await addCampaign(managerId, 'Первая рекламная компания', 'ads_1', `Role: Soroban School Assistant. Purpose: Provide comprehensive answers to inquiries related to the Soroban school, using a predefined list of questions and answers. Operation: Respond directly to the user's latest question without explicitly stating "Question-Answer". The response will be based on the relevant information from the question-answer list. The assistant will not preface responses with "Question" or "Answer", ensuring a natural and direct communication style.`, 'Привіт, Чім я можу допомогти?');
     if (campaign) {
         const telegramLink = createTelegramLink(managerId, campaign.campaignid);
         console.log('Ссылка на Telegram:', telegramLink);

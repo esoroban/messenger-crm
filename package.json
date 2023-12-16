@@ -15,6 +15,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.13",
     "config": "^3.3.9",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.3.1",
     "node-telegram-bot-api": "^0.64.0",
     "openai": "^4.20.1",
